@@ -2,10 +2,33 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     </head>
-    <body>
-    <div ng-app="">
-        <p>Name:<input type="text" ng-model="Name"></p>
-        <p ng-bind="Name"></p>
+    <body data-ng-app="myApp" ng-controller="myCntrl">
+            
+    <div >
+        <p>Name:<input type="text" data-ng-model="Name"></p>
     </div>
+    <!-- ng init -->
+    <div data-ng-init="firstName='Raul'">
+            <p>Name is <span data-ng-bind="firstName"></span></p>
+            <p ng-bind="name"></p>
+        </div>
+        <!-- Expresion -->
+        <div>
+            <p>My First Expresion: {{5+5}}</p>
+        </div>
+        <!-- JS Application -->
+        <div ng-controller="myCntrl">
+            First Name:<input type="text" ng-Model="firstName"><br>
+            last Name:<input type="text" ng-Model="lastName"><br>
+            <br>
+            Full Name:{{firstName+" "+lastName}}
+        </div>
+        <script>
+        var app = angular.module('myApp',[]);
+        app.controller('myCntrl',function($scope){
+            $scope.firstName="john";
+            $scope.lastName="Wick";
+        });
+        </script>
     </body>
 </html>
