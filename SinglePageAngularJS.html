@@ -1,24 +1,118 @@
 <html>
-<head>
-    <title>MyApp</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-</head>
-<body>
-    <!-- Header -->
-    <div class="container" id="Master">
-        <div class="row">
-            <div class="col-md-2"><img src="Logo path"></div>
-            <div col-md-4>
-                <br>
+   <head>
+      <title>MyApp</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="stylesheet" href="../AngularJS/fourmCSS.css">
+      <script src="../AngularJS/FourmJS.js"></script>
+      <script src="../AngularJS/ng-simple-upload.js"></script>
+   </head>
+   <body>
+      <div class="container" id="Master" ng-app="MyApp"  ng-controller="FourmController" >
+         <!-- Header -->
+         <div class="header">
+            <a href="#default" class="logo">CompanyLogo</a>
+            <div class="header-right">
+               <a class="active" href="#home">Home</a>
+               <a href="#contact">Contact</a>
+               <a href="#about">About</a>
             </div>
-            <div class="col-md-2">
-                
+         </div>
+         <!-- Empty Div -->
+         <div class="row" id="ED">
+            <div>
+               <br>
             </div>
-        </div>
+         </div>
+       
+         <div class="fourm" id="fourmDiv">
+               <!-- Fourm -->
+            <div class="row">
+               <form name="form" class="Fourm" ng-submite="submiteFourm()" novalidate>
+                   
+                   <!-- Romm Name -->
+                  <div class="fourm-group row" id="fourmDiv">
+                    <div class="col-md-6">
+                            <label>Room :</label>
+                    </div> 
+                    <div class="col-md-6 " ng-class="{'has-error':form.RName.$invalid && !form.RName.$pristine}">
+                            <input type="text" name="RName" class="form-control" id="IRN" data-ng-model="Room.name" required>
+                            <p ng-show="form.RName.$invalid && !form.RName.$pristine" class="help-block">Room Name is required</p>
+                    </div>
+                  </div>
+                  <div class="row" id="ED">
+                        <div>
+                           <br>
+                        </div>
+                     </div>
+                  <!-- Room Comment -->
+                  <div class="form-group row ">
+                   <div class="col-md-6">
+                        <label>Comment :</label>
+                   </div>
+                    <div class="col-md-6"  ng-class="{'has-error':form.Comment.$invalid && !form.Comment.$pristine}">
+                       <textarea name="Comment" id="Cmnt" class="form-control"  data-ng-model="Room.Comment" required></textarea>
+                            <!-- <input type="textarea" name="Comment" id="Cmnt" class="form-control"  data-ng-model="Comment" required> -->
+                            <p ng-show="form.Comment.$invalid && !form.Comment.$pristine">Comment required </p>
+                    </div>            
+                  </div>
+                <!-- Select City-->
+                <div class="form-group row ">
+                    <div class="col-md-6">
+                        <label>City :</label>
+                    </div>
+                    <div class="col-md-6" ng-class="{'has-error':form.City.$invalid && !form.City.$pristine}" >
+                        <select name="city" data-ng-model="Room.City">
+                            <option ng-repeat="name in City" >{{name.name}}</option>
+                        </select>
+                        <p ng-show="form.City.$invalid && !form.City.$pristine">Select City</p>                        
+                    </div>
+                </div>
+                <!-- Select Type Of House -->
+                <div class="form-group row ">
+                    <div class="col-md-6">
+                        <label>Type of House</label>
+                    </div>
+                    <div class="col-md-6" ng-class="{'has-error':form.HT.$invalid && !form.HT.$pristine}" >
+                        <input type="radio" id=' bhk'name='bhk' data-ng-model="Room.radio" value="BHK">BHK
+                        <input type="radio" id=' bhk'name='bhk'  data-ng-model="Room.radio" value="2 BHK">2 BHK
+                        <input type="radio" id=' bhk'name='bhk'  data-ng-model="Room.radio" value="3 BHK">3 BHK
+                        <p ng-show="form.City.$invalid && !form.City.$pristine">Select House type</p>
+                    </div>
+                </div>
+                <!-- Upload House Image -->
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <input type="file" id="file" name="file" custom-on-change="add" />
+                              <p ng-show="form.City.$invalid && !form.City.$pristine">Upload Image</p>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="update(Room)" ng-disabled="userForm.$invalid">Submit</button>
+               </form>
+            </div>
+            <div class="row" id="ED">
+                  <div>
+                     <br>
+                  </div>
+               </div>
+            <!-- Ui Design ,Display data -->
+            <div id="view">
+                  <div class="row">
+                     <div class=col-md-2><span>Room Name</span></div>
+                     <div class=col-md-2><Span>Comment</Span></div>
+                     <div class=col-md-2><Span>city</Span></div>
+                     <div class=col-md-2><span>Type of House</span></div>
+                     <div class=col-md-2>Image</div>
+                  </div>
 
-    </div>
-</body>
+            </div>
+            <div ng-repeat="x in item">
+               NAME: {{ x }}
+            </div>
+         </div>
+      </div>
+   </body>
 </html>
