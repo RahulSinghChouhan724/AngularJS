@@ -118,7 +118,7 @@
                         <td>{{item.HT}}</td>
                         <td><img ng-src={{item.RI}} height="250" width="200"></td>
                         <td>
-                              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edit</button>
+                              <button type="button" class="btn btn-info btn-lg" ng-click="update()"  data-toggle="modal" data-target="#myModal">Edit</button>
                               <!-- modal starts -->
                            <div class="modal fade" id="myModal" role="dialog">
                                  <div class="modal-dialog modal-lg">

@@ -12,7 +12,7 @@ var FourmApp= angular.module('MyApp',[]);
             elem.bind('change', function(changeEvent) {
                 var reader = new FileReader();
                 reader.onload = function(loadEvent) {
-                    scope.$apply(function() {
+                    scope.$apply(function() {       
                         scope.fileModel = loadEvent.target.result;
                     });
                 };
@@ -31,10 +31,16 @@ FourmApp.controller('FourmController',['$scope',
                 {key:"Mumbai",value:"Mumbai"},
                 {key:"delhi",value:"delhi"}
             ];
+            var num;
+            $scope.update = function() {
+               document.getElementsByName("RName")=$scope.Data.name;
+            };
             $scope.Data = [];
             //feild Fetcher
             $scope.submite= function(Room){
+                var num = (Math.ceil(Math.random() * 9));
                 var item = {};
+                item.id= num;
                 item.name = $scope.Room.name;
                 item.cmnt =$scope.Room.Comment;
                 item.City =$scope.Room.City;
