@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Lato:900i"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/sweetalert-dev.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myController" scroll="no" style="overflow: hidden">
+	
+	<div class="container col-md-12">
+		<div class="col-md-1"></div>
+		<div class="dotted col-md-10">
+			<div class="col-md-3 pading"></div>
+			<div class="col-md-6 pading">
+
+				<!-- starting of the page // form -->
+				<form ng-submit="myFunction()">
+					<div class=" col-md-12">
+						<div class="img col-md-4 pading">
+							<label for="InputFile">Type Of Image</label>
+						</div>
+						<div class="col-md-8 ">
+							<input file-read type="file" class="form-control" id="inputFile"
+								file-model="inputFile" aria-describedby="fileHelp"
+								accept="image/*">
+						</div>
+					</div>
+
+					<div class=" col-lg-12">
+						<div class="col-md-5 pading"></div>
+						<div class="col-md-2">
+							<button type="submit" class="btn btn-default center-block">Submit
+							</button>
+						</div>
+						<div class="col-md-5 pading"></div>
+					</div>
+
+				</form>
+				<!-- end of form submission -->
+			</div>
+			<div class="col-md-3 pading"></div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	<!-- End of view container-->
+
+	<!-- model for validation pop up -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body" style="padding: 40px 50px;">
+					<p id="p1" class="nav"></p>
+				</div>
+				<div class="modal-footer" style="text-align: center;">
+					<button type="submit"
+						class="btn btn-danger btn-default pull-center"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-ok"></span> okay
+					</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- end of model for validation pop up -->
+
+
+	<!--end of view for data to be displayed -->
+</body>
+
+<script>
+	//controller
+	angular
+			.module("myApp", [])
+
+			.directive('fileRead', [ function() {
+				return {
+					restrict : 'A',
+					scope : {
+						fileModel : '='
+					},
+					link : function(scope, elem, attr) {
+						elem.bind('change', function(changeEvent) {
+							var reader = new FileReader();
+							reader.onload = function(loadEvent) {
+								scope.$apply(function() {
+									scope.fileModel = loadEvent.target.result;
+								});
+							};
+							reader.readAsDataURL(changeEvent.target.files[0]);
+						});
+					}
+				}
+			} ])
+
+			.controller(
+					"myController",
+					[
+							'$scope',
+							function($user, $window) {
+								$user.todos = [];
+								
+								$user.myFunction = function() {
+									
+
+									
+
+										sessionStorage.setItem('todos', JSON
+												.stringify($user.todos));
+										$user.todos.push({
+											
+											inputFile : $user.inputFile
+										});
+
+								}
+
+							
+
+							} ]); // end of controller
+</script>
+</html>

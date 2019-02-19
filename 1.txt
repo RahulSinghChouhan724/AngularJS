@@ -1,0 +1,20 @@
+   $scope.City=[
+        {name:"Bangalore"},
+        {name:"Mumbai"},
+        {name:"delhi"}
+    ];
+    $scope.Data = [];
+    //feild Fetcher
+    $scope.submite= function(Room){
+        var item = {};
+        item.name = $scope.Room.name;
+        item.cmnt =$scope.Room.Comment;
+        item.City =$scope.Room.City;
+        item.HT = $scope.Room.radio;
+       
+        // item.RI=$scope.fd;
+        $scope.Data.push(item); 
+        // var my =JSON.stringify(item);
+        
+       
+    }
