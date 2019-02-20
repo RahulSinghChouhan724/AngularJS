@@ -32,26 +32,30 @@ FourmApp.controller('FourmController',['$scope',
                 {key:"delhi",value:"delhi"}
             ];
             var num;
-            $scope.update = function() {
-               document.getElementsByName("RName")=$scope.Data.name;
-            };
-            $scope.Data = [];
+            
+            $scope.roomData = [];
+            var item = {};
+            var itemObj ;
             //feild Fetcher
-            $scope.submite= function(Room){
+            $scope.submite= function(){
                 var num = (Math.ceil(Math.random() * 9));
-                var item = {};
+              
                 item.id= num;
-                item.name = $scope.Room.name;
-                item.cmnt =$scope.Room.Comment;
-                item.City =$scope.Room.City;
-                item.HT = $scope.Room.radio;
-                item.RI = $scope.Room.inputFile;
-                // item.RI=$scope.fd;
-                $scope.Data.push(item); 
-                // var my =JSON.stringify(item);
+                item.name = $scope.User.name;
+                item.cmnt =$scope.User.Comment;
+                item.City =$scope.User.City;
+                item.HT = $scope.User.radio;
+                item.RI = $scope.User.inputFile;
+               
+                 itemObj = angular.copy(item);
+                $scope.roomData.push(itemObj); 
                 
-               $scope.Room.name="";
             }
+            //$scope.Room.name="";
+
+            $scope.updateForm = function() {
+
+            };
         }     
  
 ]);

@@ -38,7 +38,7 @@
                         <label>Room :</label>
                      </div>
                      <div class="col-md-6 " ng-class="{'has-error':form.RName.$invalid && !form.RName.$pristine}">
-                        <input type="text" name="RName" class="form-control" id="IRN" data-ng-model="Room.name" required>
+                        <input type="text" name="RName" class="form-control" id="IRN" data-ng-model="User.name" required>
                         <p ng-show="form.RName.$invalid && !form.RName.$pristine" class="help-block">Room Name is required</p>
                      </div>
                   </div>
@@ -53,7 +53,7 @@
                         <label>Comment :</label>
                      </div>
                      <div class="col-md-6"  ng-class="{'has-error':form.Comment.$invalid && !form.Comment.$pristine}">
-                        <textarea name="Comment" id="Cmnt" class="form-control"  data-ng-model="Room.Comment" required></textarea>
+                        <textarea name="Comment" id="Cmnt" class="form-control"  data-ng-model="User.Comment" required></textarea>
                         <!-- <input type="textarea" name="Comment" id="Cmnt" class="form-control"  data-ng-model="Comment" required> -->
                         <p ng-show="form.Comment.$invalid && !form.Comment.$pristine">Comment required </p>
                      </div>
@@ -64,7 +64,7 @@
                         <label>City :</label>
                      </div>
                      <div class="col-md-6" ng-class="{'has-error':form.City.$invalid && !form.City.$pristine}" >
-                        <select name="city" data-ng-model="Room.City">
+                        <select name="city" data-ng-model="User.City">
                            <option  ng-repeat="name in City" value={{name.key}}>{{name.value}}</option>
                         </select>
                         <p ng-show="form.City.$invalid && !form.City.$pristine">Select City</p>
@@ -76,7 +76,7 @@
                         <label>Type of House</label>
                      </div>
                      <div class="col-md-6" ng-class="{'has-error':form.HT.$invalid && !form.HT.$pristine}" >
-                        <input type="radio" id=' bhk'name='bhk' data-ng-model="Room.radio" value="BHK">BHK
+                        <input type="radio" id=' bhk'name='bhk' data-ng-model= "Room.radio" value="BHK">BHK
                         <input type="radio" id=' bhk'name='bhk'  data-ng-model="Room.radio" value="2 BHK">2 BHK
                         <input type="radio" id=' bhk'name='bhk'  data-ng-model="Room.radio" value="3 BHK">3 BHK
                         <p ng-show="form.City.$invalid && !form.City.$pristine">Select House type</p>
@@ -102,7 +102,7 @@
             </div>
             <!-- Ui Design ,Display data -->
             <div id="view">
-               <div class="row">
+               <div class="row center">
                   <table border="1" style="width:95%; text-align: center;">
                      <tr>
                         <th>Name</th>
@@ -111,31 +111,35 @@
                         <th>BHk</th>
                         <th>Image</th>
                      </tr>
-                     <tr ng-repeat="item in Data">
+                     <tr ng-repeat="item in roomData track by $index">
                         <td>{{item.name}}</td>
                         <td>{{item.cmnt}}</td>
                         <td>{{item.City}}</td>
                         <td>{{item.HT}}</td>
-                        <td><img ng-src={{item.RI}} height="250" width="200"></td>
                         <td>
-                              <button type="button" class="btn btn-info btn-lg" ng-click="update()"  data-toggle="modal" data-target="#myModal">Edit</button>
+                        <div style="width: 210;height:210;">
+                        <img ng-src={{item.RI}} height="200" width="200">
+                        </div>
+                        </td>
+                        <td>
+                              <button type="button" class="btn btn-info btn-lg">Edit</button>
                               <!-- modal starts -->
                            <div class="modal fade" id="myModal" role="dialog">
                                  <div class="modal-dialog modal-lg">
                                    <div class="modal-content">
                                      <div class="modal-header">
-                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                       <h4 class="modal-title">Modal Header</h4>
+                                       <button type="button" class="close">&times;</button>
+                                       <h4 class="modal-title">Update Form</h4>
                                      </div>
                                      <div class="modal-body">
-                                          <form name="form" class="Fourm" ng-submite="submiteFourm()" novalidate>
+                                          <form name="form" class="Fourm" ng-submite="updateFourm()" novalidate>
                                                 <!-- Romm Name -->
                                                 <div class="fourm-group row" id="fourmDiv">
                                                    <div class="col-md-6">
                                                       <label>Room :</label>
                                                    </div>
-                                                   <div class="col-md-6 " ng-class="{'has-error':form.RName.$invalid && !form.RName.$pristine}">
-                                                      <input type="text" name="RName" class="form-control" id="IRN" data-ng-model="Room.name" required>
+                                                      <div class="col-md-6 " ng-class="{'has-error':form.RName.$invalid && !form.RName.$pristine}">
+                                                      <input type="text" name="RName" class="form-control" id="IRN" data-ng-model="Room.name" value={{Room.name}} required>
                                                       <p ng-show="form.RName.$invalid && !form.RName.$pristine" class="help-block">Room Name is required</p>
                                                    </div>
                                                 </div>
@@ -150,7 +154,7 @@
                                                       <label>Comment :</label>
                                                    </div>
                                                    <div class="col-md-6"  ng-class="{'has-error':form.Comment.$invalid && !form.Comment.$pristine}">
-                                                      <textarea name="Comment" id="Cmnt" class="form-control"  data-ng-model="Room.Comment" required></textarea>
+                                                      <textarea name="Comment" id="Cmnt" class="form-control"  data-ng-model="Room.Comment"  value={{Room.Comment}} required>{{Room.Comment}} </textarea>
                                                       <!-- <input type="textarea" name="Comment" id="Cmnt" class="form-control"  data-ng-model="Comment" required> -->
                                                       <p ng-show="form.Comment.$invalid && !form.Comment.$pristine">Comment required </p>
                                                    </div>
@@ -189,10 +193,10 @@
                                                       <p ng-show="form.City.$invalid && !form.City.$pristine">Upload Image</p>
                                                    </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary" ng-click="submite()" ng-disabled="userForm.$invalid">Submit</button>
+                                                <button type="submit" class="btn btn-primary" ng-click="updateForm()" onclick="updateForm()"  ng-disabled="userForm.$invalid">Update</button>
                                              </form>
-                                     </div>
-                                     <div class="modal-footer">
+                                           </div>
+                                        <div class="modal-footer">
                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                      </div>
                                    </div>
