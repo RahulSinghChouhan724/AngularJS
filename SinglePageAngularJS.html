@@ -1,6 +1,6 @@
 <html>
    <head>
-      <title>MyApp</title>
+      <title></title>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -38,7 +38,7 @@
                         <label>Room :</label>
                      </div>
                      <div class="col-md-6 " ng-class="{'has-error':form.RName.$invalid && !form.RName.$pristine}">
-                        <input type="text" name="RName" class="form-control" id="IRN" data-ng-model="User.name" required>
+                        <input type="text" name="RName" class="form-control" id="IRN" data-ng-model="Room.name" required>
                         <p ng-show="form.RName.$invalid && !form.RName.$pristine" class="help-block">Room Name is required</p>
                      </div>
                   </div>
@@ -53,7 +53,7 @@
                         <label>Comment :</label>
                      </div>
                      <div class="col-md-6"  ng-class="{'has-error':form.Comment.$invalid && !form.Comment.$pristine}">
-                        <textarea name="Comment" id="Cmnt" class="form-control"  data-ng-model="User.Comment" required></textarea>
+                        <textarea name="Comment" id="Cmnt" class="form-control"  data-ng-model="Room.Comment" required></textarea>
                         <!-- <input type="textarea" name="Comment" id="Cmnt" class="form-control"  data-ng-model="Comment" required> -->
                         <p ng-show="form.Comment.$invalid && !form.Comment.$pristine">Comment required </p>
                      </div>
@@ -64,7 +64,7 @@
                         <label>City :</label>
                      </div>
                      <div class="col-md-6" ng-class="{'has-error':form.City.$invalid && !form.City.$pristine}" >
-                        <select name="city" data-ng-model="User.City">
+                        <select name="city" data-ng-model="Room.City">
                            <option  ng-repeat="name in City" value={{name.key}}>{{name.value}}</option>
                         </select>
                         <p ng-show="form.City.$invalid && !form.City.$pristine">Select City</p>
@@ -92,7 +92,7 @@
                         <p ng-show="form.City.$invalid && !form.City.$pristine">Upload Image</p>
                      </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" ng-click="submite()" ng-disabled="userForm.$invalid">Submit</button>
+                  <button type="submit" class="btn btn-primary" ng-click="submite(Room)" ng-disabled="submiteFourm.$invalid">Submit</button>
                </form>
             </div>
             <div class="row" id="ED">
@@ -122,88 +122,92 @@
                         </div>
                         </td>
                         <td>
-                              <button type="button" class="btn btn-info btn-lg">Edit</button>
-                              <!-- modal starts -->
-                           <div class="modal fade" id="myModal" role="dialog">
-                                 <div class="modal-dialog modal-lg">
-                                   <div class="modal-content">
-                                     <div class="modal-header">
-                                       <button type="button" class="close">&times;</button>
-                                       <h4 class="modal-title">Update Form</h4>
-                                     </div>
-                                     <div class="modal-body">
-                                          <form name="form" class="Fourm" ng-submite="updateFourm()" novalidate>
-                                                <!-- Romm Name -->
-                                                <div class="fourm-group row" id="fourmDiv">
-                                                   <div class="col-md-6">
-                                                      <label>Room :</label>
-                                                   </div>
-                                                      <div class="col-md-6 " ng-class="{'has-error':form.RName.$invalid && !form.RName.$pristine}">
-                                                      <input type="text" name="RName" class="form-control" id="IRN" data-ng-model="Room.name" value={{Room.name}} required>
-                                                      <p ng-show="form.RName.$invalid && !form.RName.$pristine" class="help-block">Room Name is required</p>
-                                                   </div>
-                                                </div>
-                                                <div class="row" id="ED">
-                                                   <div>
-                                                      <br>
-                                                   </div>
-                                                </div>
-                                                <!-- Room Comment -->
-                                                <div class="form-group row ">
-                                                   <div class="col-md-6">
-                                                      <label>Comment :</label>
-                                                   </div>
-                                                   <div class="col-md-6"  ng-class="{'has-error':form.Comment.$invalid && !form.Comment.$pristine}">
-                                                      <textarea name="Comment" id="Cmnt" class="form-control"  data-ng-model="Room.Comment"  value={{Room.Comment}} required>{{Room.Comment}} </textarea>
-                                                      <!-- <input type="textarea" name="Comment" id="Cmnt" class="form-control"  data-ng-model="Comment" required> -->
-                                                      <p ng-show="form.Comment.$invalid && !form.Comment.$pristine">Comment required </p>
-                                                   </div>
-                                                </div>
-                                                <!-- Select City-->
-                                                <div class="form-group row ">
-                                                   <div class="col-md-6">
-                                                      <label>City :</label>
-                                                   </div>
-                                                   <div class="col-md-6" ng-class="{'has-error':form.City.$invalid && !form.City.$pristine}" >
-                                                      <select name="city" data-ng-model="Room.City">
-                                                         <option  ng-repeat="name in City" value={{name.key}}>{{name.value}}</option>
-                                                      </select>
-                                                      <p ng-show="form.City.$invalid && !form.City.$pristine">Select City</p>
-                                                   </div>
-                                                </div>
-                                                <!-- Select Type Of House -->
-                                                <div class="form-group row ">
-                                                   <div class="col-md-6">
-                                                      <label>Type of House</label>
-                                                   </div>
-                                                   <div class="col-md-6" ng-class="{'has-error':form.HT.$invalid && !form.HT.$pristine}" >
-                                                      <input type="radio" id=' bhk'name='bhk' data-ng-model="Room.radio" value="BHK">BHK
-                                                      <input type="radio" id=' bhk'name='bhk'  data-ng-model="Room.radio" value="2 BHK">2 BHK
-                                                      <input type="radio" id=' bhk'name='bhk'  data-ng-model="Room.radio" value="3 BHK">3 BHK
-                                                      <p ng-show="form.City.$invalid && !form.City.$pristine">Select House type</p>
-                                                   </div>
-                                                </div>
-                                                <!-- Upload House Image -->
-                                                <div class="form-group row">
-                                                   <div class="col-md-6">
-                                                   </div>
-                                                   <div class="col-md-6">
-                                                      <input file-read type="file" class="form-control" id="inputFile" file-model="Room.inputFile" aria-describedby="fileHelp"
-                                                         accept="image/*">
-                                                      <p ng-show="form.City.$invalid && !form.City.$pristine">Upload Image</p>
-                                                   </div>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary" ng-click="updateForm()" onclick="updateForm()"  ng-disabled="userForm.$invalid">Update</button>
-                                             </form>
-                                           </div>
-                                        <div class="modal-footer">
-                                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                     </div>
-                                   </div>
-                                 </div>
-                               </div>
-
-                        </td>
+                       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                        <div class="modal fade" id="myModal" role="dialog">
+							    <div class="modal-dialog">
+							    
+							      <!-- Modal content-->
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Update Form</h4>
+							        </div>
+							        <div class="modal-body">
+							          <!-- Fourm -->
+            <div class="row">
+               <form name="form" class="Fourm" ng-submite="submiteFourm()" novalidate>
+                  <!-- Romm Name -->
+                  <div class="fourm-group row" id="fourmDiv">
+                     <div class="col-md-6">
+                        <label>Room :</label>
+                     </div>
+                     <div class="col-md-6 " ng-class="{'has-error':form.RName.$invalid && !form.RName.$pristine}">
+                        <input type="text" name="RName" class="form-control" id="IRN" data-ng-model="Room.name" required>
+                        <p ng-show="form.RName.$invalid && !form.RName.$pristine" class="help-block">Room Name is required</p>
+                     </div>
+                  </div>
+                  <div class="row" id="ED">
+                     <div>
+                        <br>
+                     </div>
+                  </div>
+                  <!-- Room Comment -->
+                  <div class="form-group row ">
+                     <div class="col-md-6">
+                        <label>Comment :</label>
+                     </div>
+                     <div class="col-md-6"  ng-class="{'has-error':form.Comment.$invalid && !form.Comment.$pristine}">
+                        <textarea name="Comment" id="Cmnt" class="form-control"  data-ng-model="Room.Comment" required></textarea>
+                        <!-- <input type="textarea" name="Comment" id="Cmnt" class="form-control"  data-ng-model="Comment" required> -->
+                        <p ng-show="form.Comment.$invalid && !form.Comment.$pristine">Comment required </p>
+                     </div>
+                  </div>
+                  <!-- Select City-->
+                  <div class="form-group row ">
+                     <div class="col-md-6">
+                        <label>City :</label>
+                     </div>
+                     <div class="col-md-6" ng-class="{'has-error':form.City.$invalid && !form.City.$pristine}" >
+                        <select name="city" data-ng-model="Room.City">
+                           <option  ng-repeat="name in City" value={{name.key}}>{{name.value}}</option>
+                        </select>
+                        <p ng-show="form.City.$invalid && !form.City.$pristine">Select City</p>
+                     </div>
+                  </div>
+                  <!-- Select Type Of House -->
+                  <div class="form-group row ">
+                     <div class="col-md-6">
+                        <label>Type of House</label>
+                     </div>
+                     <div class="col-md-6" ng-class="{'has-error':form.HT.$invalid && !form.HT.$pristine}" >
+                        <input type="radio" id=' bhk'name='bhk' data-ng-model= "Room.radio" value="BHK">BHK
+                        <input type="radio" id=' bhk'name='bhk'  data-ng-model="Room.radio" value="2 BHK">2 BHK
+                        <input type="radio" id=' bhk'name='bhk'  data-ng-model="Room.radio" value="3 BHK">3 BHK
+                        <p ng-show="form.City.$invalid && !form.City.$pristine">Select House type</p>
+                     </div>
+                  </div>
+                  <!-- Upload House Image -->
+                  <div class="form-group row">
+                     <div class="col-md-6">
+                     </div>
+                     <div class="col-md-6">
+                        <input file-read type="file" class="form-control" id="inputFile" file-model="Room.inputFile" aria-describedby="fileHelp"
+                           accept="image/*">
+                        <p ng-show="form.City.$invalid && !form.City.$pristine">Upload Image</p>
+                     </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" ng-click="UpdateForm()" ng-disabled="submiteFourm.$invalid">Update</button>
+               </form>
+            </div>
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							        </div>
+							      </div>      
+							    </div>
+	 						 </div>
+  
+                       </td>
                         <td><button type="button"  data-target="#MyModal">Delete</button></td>
                      </tr>
                   </table>

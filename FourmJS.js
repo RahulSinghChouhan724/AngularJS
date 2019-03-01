@@ -37,15 +37,15 @@ FourmApp.controller('FourmController',['$scope',
             var item = {};
             var itemObj ;
             //feild Fetcher
-            $scope.submite= function(){
+            $scope.submite= function(Room){
                 var num = (Math.ceil(Math.random() * 9));
               
                 item.id= num;
-                item.name = $scope.User.name;
-                item.cmnt =$scope.User.Comment;
-                item.City =$scope.User.City;
-                item.HT = $scope.User.radio;
-                item.RI = $scope.User.inputFile;
+                item.name = $scope.Room.name;
+                item.cmnt =$scope.Room.Comment;
+                item.City =$scope.Room.City;
+                item.HT = $scope.Room.radio;
+                item.RI = $scope.Room.inputFile;
                
                  itemObj = angular.copy(item);
                 $scope.roomData.push(itemObj); 
@@ -53,8 +53,16 @@ FourmApp.controller('FourmController',['$scope',
             }
             //$scope.Room.name="";
 
-            $scope.updateForm = function() {
-
+            $scope.updateForm = function(Room) {
+             
+            	  item.name = $scope.Room.name;
+                  item.cmnt =$scope.Room.Comment;
+                  item.City =$scope.Room.City;
+                  item.HT = $scope.Room.radio;
+                  item.RI = $scope.Room.inputFile;
+                  
+                  
+            	
             };
         }     
  
