@@ -51,16 +51,50 @@ FourmApp.controller('FourmController',['$scope',
                 $scope.roomData.push(itemObj); 
                 
             }
+            var id ;
             //$scope.Room.name="";
-
-            $scope.updateForm = function(Room) {
+            $scope.setFeild= function(index){
+                        	
+            	for(var i=0; i<$scope.roomData.length; i++){
+            		if(index == $scope.roomData[i]){
+            			item.id = index.id;
+            			document.getElementById('UIRN').value = index.name;
+            			document.getElementById('UCmnt').value = index.cmnt;
+            			document.getElementById('UCity').value = index.City;
+            			document.getElementById('Ubhk').value = index.HT;
+            	
+            		}
+            	}
+            	return id;
+            }
+            
+            $scope.deleteRow = function(item){
+         
+                   for(var i=0;i<$scope.roomData.length;i++){
+            	if($scope.roomData[i].id == item.id){
+            		$scope.roomData.splice(i,1);
+            		/*$scope.$apply();*/
+            	}
+            }
+            	
+            }
+            
+            $scope.updateForm = function(item) {
              
-            	  item.name = $scope.Room.name;
-                  item.cmnt =$scope.Room.Comment;
-                  item.City =$scope.Room.City;
-                  item.HT = $scope.Room.radio;
-                  item.RI = $scope.Room.inputFile;
-                  
+            	 for(var i=0;i<$scope.roomData.length;i++){
+            		if($scope.roomData[i].id == item.id){
+            			
+                        item.name = $scope.Room.name;
+                        item.cmnt =$scope.Room.Comment;
+                        item.City =$scope.Room.City;
+                        item.HT = $scope.Room.radio;
+                        item.RI = $scope.Room.inputFile;
+                       
+                      
+                        
+            		} 
+            		 
+            	 }
                   
             	
             };
