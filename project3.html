@@ -1,0 +1,58 @@
+<html>
+   <head>
+      <title>Insert title here</title>
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+      <style type="text/css">
+          .row{
+         	padding-top:250px;
+           	text-align:center;
+         }
+         .head{
+        display: none;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="container"ng-app="MyApp" ng-controller="MyCntrl" ng-init="displayName()">     
+       <form >
+         <div class="row">
+            <div class="col-md-4">
+       				<div class="head1" ng-show="" ng-modal="Fist_div">
+       					<label>First Name</label>
+       					<input type="text" class="I_name" id="F_name" ng-modal="F_name" ng-keypress="display($event)">
+       				</div>
+       				<div class="head" ng-hide="">
+       					<span>Middle Name</span>
+       					<input type="text" class="I_name" id="M_name" ng-modal="M_name" ng-keypress="display($event)>
+       				</div>
+       				<div class="head">
+       					<span>Last Name</span>
+       					<input type="text" class="I_name" id="L_name" ng-modal="L_name" ng-keypress="displayFullName($event)>
+       				</div>
+       			</div>	
+       				<div class="col-md-4">
+       					<label>Full Name</label>
+       		   			<input type="text" class="fname" id="F_name">	
+       				</div>
+       				
+       	</div>
+         </form>       
+        
+       </div>
+      <script type="text/javascript">
+         var Name = angular.module('MyApp',[]);
+         Name.controller('MyCntrl',['$scope',
+			var Name_arr =[];
+     		$scope.display = function(event){
+					if(event.keycode == 13){
+						for(var i=0;i<3;i++){
+								var name = document.getElementById("I_name").value				
+									}		
+						}
+       		}
+             ]);
+         
+      </script>
+   </body>
+</html>

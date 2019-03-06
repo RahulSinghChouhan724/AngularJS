@@ -51,22 +51,16 @@ FourmApp.controller('FourmController',['$scope',
                 $scope.roomData.push(itemObj); 
                 
             }
-            var id ;
+            var id ;	
             //$scope.Room.name="";
             $scope.setFeild= function(index){
                         	
             	for(var i=0; i<$scope.roomData.length; i++){
             		if(index == $scope.roomData[i]){
             			item.id = index.id;
-            			document.getElementById('UIRN').value = index.name;
-            			document.getElementById('UCmnt').value = index.cmnt;
-            			document.getElementById('UCity').value = index.City;
-            			document.getElementById('Ubhk').value = index.HT;
-            	
+            			item.name = index.name;
             		}
-            	}
-            	return id;
-            }
+            			
             
             $scope.deleteRow = function(item){
          
@@ -89,15 +83,13 @@ FourmApp.controller('FourmController',['$scope',
                         item.City =$scope.Room.City;
                         item.HT = $scope.Room.radio;
                         item.RI = $scope.Room.inputFile;
-                       
-                      
-                        
+                     
             		} 
             		 
             	 }
-                  
-            	
+            
             };
         }     
- 
+            }	
+            }
 ]);

@@ -1,0 +1,18 @@
+document.getElementById('UIRN').value = index.name;
+            			document.getElementById('UCmnt').value = index.cmnt;
+            			document.getElementById('UCity').value = index.City;
+            			if(index.HT == "BHK"){
+            				document.getElementById("Ubhk").checked=true;
+	
+            			}else 
+            				if(index.HT == "2 BHK"){
+            					document.getElementById('UBHk').checked=true;
+
+            				}else{
+            					document.getElementById('bhk3').checked=true;
+
+            				}
+            			            	
+            		}
+            	}
+            	return id;

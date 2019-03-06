@@ -29,8 +29,9 @@
             </div>
          </div>
          <div class="fourm" id="fourmDiv">
+         
             <!-- Fourm -->
-            <div class="row">
+            <div class="row" class="border">
                <form name="form" class="Fourm" ng-submite="submiteFourm()" novalidate>
                   <!-- Romm Name -->
                   <div class="fourm-group row" id="fourmDiv">
@@ -95,6 +96,8 @@
                   <button type="submit" class="btn btn-primary" ng-click="submite(Room)" ng-disabled="submiteFourm.$invalid">Submit</button>
                </form>
             </div>
+            
+            <!-- Table Display of for data -->
             <div class="row" id="ED">
                <div>
                   <br>
@@ -103,7 +106,7 @@
             <!-- Ui Design ,Display data -->
             <div id="view">
                <div class="row center">
-                  <table border="1" style="width:95%; text-align: center;">
+                  <table  style="width:95%; text-align: center; ">
                      <tr>
                         <th>Name</th>
                         <th>Comment</th>
@@ -117,7 +120,7 @@
                         <td>{{item.City}}</td>
                         <td>{{item.HT}}</td>
                         <td>
-                        <div style="width: 210;height:210;">
+                        <div style="width: 210;height:210;padding-top: 20px;">
                         <img ng-src={{item.RI}} height="200" width="200">
                         </div>
                         </td>
@@ -180,9 +183,9 @@
                         <label>Type of House</label>
                      </div>
                      <div class="col-md-6" ng-class="{'has-error':form.HT.$invalid && !form.HT.$pristine}" >
-                        <input type="radio" id=' bhk'name='bhk'  value="BHK">BHK
-                        <input type="radio" id=' bhk'name='bhk'   value="2 BHK">2 BHK
-                        <input type="radio" id=' bhk'name='bhk'   value="3 BHK">3 BHK
+                        <input type="radio" id=' Ubhk' name='bhk1' class ="bhk" value="BHK">BHK
+                        <input type="radio" id=' Ubhk'name='bhk2'   value="2 BHK">2 BHK
+                        <input type="radio" id=' Ubhk'name='bhk3'   value="3 BHK">3 BHK
                         <p ng-show="form.City.$invalid && !form.City.$pristine">Select House type</p>
                      </div>
                   </div>
