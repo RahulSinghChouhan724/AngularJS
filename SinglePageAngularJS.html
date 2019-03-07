@@ -28,9 +28,12 @@
                <br>
             </div>
          </div>
+         
+
          <div class="fourm" id="fourmDiv">
          
-            <!-- Fourm -->
+         <!--  form to take values from the user -->
+         
             <div class="row" class="border">
                <form name="form" class="Fourm" ng-submite="submiteFourm()" novalidate>
                   <!-- Romm Name -->
@@ -65,7 +68,7 @@
                         <label>City :</label>
                      </div>
                      <div class="col-md-6" ng-class="{'has-error':form.City.$invalid && !form.City.$pristine}" >
-                        <select name="city" data-ng-model="Room.City">
+                        <select name="city" data-ng-model="Room.City" id="selectCity">
                            <option  ng-repeat="name in City" value={{name.key}}>{{name.value}}</option>
                         </select>
                         <p ng-show="form.City.$invalid && !form.City.$pristine">Select City</p>
@@ -93,17 +96,19 @@
                         <p ng-show="form.City.$invalid && !form.City.$pristine">Upload Image</p>
                      </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" ng-click="submite(Room)" ng-disabled="submiteFourm.$invalid">Submit</button>
+                  <button type="submit" class="btn btn-primary" ng-click="submite(Room,form)" ng-disabled="submiteFourm.$invalid">Submit</button>
                </form>
             </div>
             
-            <!-- Table Display of for data -->
+            <!-- First form Ends Here -->
+            		
+            <!--Display Data-->
+     				
             <div class="row" id="ED">
                <div>
                   <br>
                </div>
             </div>
-            <!-- Ui Design ,Display data -->
             <div id="view">
                <div class="row center">
                   <table  style="width:95%; text-align: center; ">
@@ -114,108 +119,108 @@
                         <th>BHk</th>
                         <th>Image</th>
                      </tr>
+                     <!--  data display-->
                      <tr ng-repeat="item in roomData track by $index">
                         <td>{{item.name}}</td>
                         <td>{{item.cmnt}}</td>
                         <td>{{item.City}}</td>
                         <td>{{item.HT}}</td>
                         <td>
-                        <div style="width: 210;height:210;padding-top: 20px;">
-                        <img ng-src={{item.RI}} height="200" width="200">
-                        </div>
+                           <div style="width: 210;height:210;padding-top: 20px;">
+                              <img ng-src={{item.RI}} height="200" width="200">
+                           </div>
                         </td>
                         <td>
-                       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="setFeild(item)">Edit</button>
-                        <div class="modal fade" id="myModal" role="dialog">
-							    <div class="modal-dialog">
-							    
-							      <!-- Modal content-->
-							      <div class="modal-content">
-							        <div class="modal-header">
-							          <button type="button" class="close" data-dismiss="modal">&times;</button>
-							          <h4 class="modal-title">Update Form</h4>
-							        </div>
-							        <div class="modal-body">
-							          <!-- Fourm -->
-            <div class="row">
-               <form name="form" class="Fourm" ng-submite="submiteFourm()" novalidate>
-                  <!-- Romm Name -->
-                  <div class="fourm-group row" id="fourmDiv">
-                     <div class="col-md-6">
-                        <label>Room :</label>
-                     </div>
-                     <div class="col-md-6 " ng-class="{'has-error':form.RName.$invalid && !form.RName.$pristine}">
-                        <input type="text" name="RName" class="form-control" id="UIRN" >
-                        <p ng-show="form.RName.$invalid && !form.RName.$pristine" class="help-block">Room Name is required</p>
-                     </div>
-                  </div>
-                  <div class="row" id="ED">
-                     <div>
-                        <br>
-                     </div>
-                  </div>
-                  <!-- Room Comment -->
-                  <div class="form-group row ">
-                     <div class="col-md-6">
-                        <label>Comment :</label>
-                     </div>
-                     <div class="col-md-6"  ng-class="{'has-error':form.Comment.$invalid && !form.Comment.$pristine}">
-                        <textarea name="Comment" id="UCmnt" class="form-control" ></textarea>
-                        <!-- <input type="textarea" name="Comment" id="Cmnt" class="form-control"  data-ng-model="Comment" required> -->
-                        <p ng-show="form.Comment.$invalid && !form.Comment.$pristine">Comment required </p>
-                     </div>
-                  </div>
-                  <!-- Select City-->
-                  <div class="form-group row ">
-                     <div class="col-md-6">
-                        <label>City :</label>
-                     </div>
-                     <div class="col-md-6" ng-class="{'has-error':form.City.$invalid && !form.City.$pristine}" >
-                        <select name="city" >
-                           <option  ng-repeat="name in City" id="UCity" value={{name.key}}>{{name.value}}</option>
-                        </select>
-                        <p ng-show="form.City.$invalid && !form.City.$pristine">Select City</p>
-                     </div>
-                  </div>
-                  <!-- Select Type Of House -->
-                  <div class="form-group row ">
-                     <div class="col-md-6">
-                        <label>Type of House</label>
-                     </div>
-                     <div class="col-md-6" ng-class="{'has-error':form.HT.$invalid && !form.HT.$pristine}" >
-                        <input type="radio" id=' Ubhk' name='bhk1' class ="bhk" value="BHK">BHK
-                        <input type="radio" id=' Ubhk'name='bhk2'   value="2 BHK">2 BHK
-                        <input type="radio" id=' Ubhk'name='bhk3'   value="3 BHK">3 BHK
-                        <p ng-show="form.City.$invalid && !form.City.$pristine">Select House type</p>
-                     </div>
-                  </div>
-                  <!-- Upload House Image -->
-                  <div class="form-group row">
-                     <div class="col-md-6">
-                     </div>
-                     <div class="col-md-6">
-                        <input file-read type="file" class="form-control" id="inputFile" file-model="Room.inputFile" aria-describedby="fileHelp"
-                           accept="image/*">
-                        <p ng-show="form.City.$invalid && !form.City.$pristine">Upload Image</p>
-                     </div>
-                  </div>
-                  <button type="submit" class="btn btn-primary" ng-click="setFeild(Room)" ng-disabled="submiteFourm.$invalid">Submit</button>
-               </form>
-            </div>
-							        </div>
-							        <div class="modal-footer">
-							          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							        </div>
-							      </div>      
-							    </div>
-	 						 </div>
-  
-                       </td>
+                           <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" data-ng-click="setFeild(item)">Edit</button>
+                        </td>
                         <td><button type="button"  data-target="#MyModal" ng-click="deleteRow(item)">Delete</button></td>
                      </tr>
                   </table>
                </div>
             </div>
+            
+			<!-- pop-up  modal starts -->
+			<div class="modal fade" id="myModal" role="dialog">
+                              <div class="modal-dialog modal-lg">
+                                 <!-- Modal content-->
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h4 class="modal-title">Update Form</h4>
+                                       <button type="button" class="close" data-dismiss="modal">&times;</button>							         
+                                    </div>
+                                    <div class="modal-body">
+                                    
+                                    	<!--edit Form  starts here-->
+                                       <div class="row">
+                                          <!-- Second form -->
+                                          <form name="form" class="Fourm" ng-submite="submiteFourm()" novalidate>
+                                             <!-- Romm Name -->
+                                             <div class="fourm-group row" id="fourmDiv">
+                                                <div class="col-md-6">
+                                                   <label>Room :</label>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                   <input type="text" name="RName"  class="form-control" id="upRoomId" >
+                                                </div>
+                                             </div>
+                                             <div class="row" id="ED">
+                                                <div>
+                                                   <br>
+                                                </div>
+                                             </div>
+                                             <!-- Room Comment -->
+                                             <div class="form-group row ">
+                                                <div class="col-md-6">
+                                                   <label>Comment :</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                   <textarea name="Comment" id="upRoomComment"  class="form-control" ></textarea>
+                                                   <!-- <input type="textarea" name="Comment" id="Cmnt" class="form-control"  data-ng-model="Comment" required> -->
+                                                </div>
+                                             </div>
+                                             <!-- Select City-->
+                                             <div class="form-group row ">
+                                                <div class="col-md-6">
+                                                   <label>City :</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                   <select name="city" >
+                                                      <option  ng-repeat="name in City" id="upCity" value="something" >{{name.value}}</option>
+                                                   </select>
+                                                </div>
+                                             </div>
+                                             <!-- Select Type Of House -->
+                                             <div class="form-group row ">
+                                                <div class="col-md-6">
+                                                   <label>Type of House</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                   <input type="radio" id="upBhk" name='bhk1' class="bhk" value="1 BHK">BHK
+                                                   <input type="radio" id="upBhk" name='bhk2'  value="2 BHK" data-ng-modal="Room.Radio">2 BHK
+                                                   <input type="radio" id="upBhk" name='bhk3'  value="3 BHK" data-ng-modal="Room.Radio">3 BHK
+                                                </div>
+                                             </div>
+                                             <!-- Upload House Image -->
+                                             <!-- <div class="form-group row">
+                                                <div class="col-md-6">
+                                                </div>
+                                                <div class="col-md-4">
+                                                   <input file-read type="file" class="form-control" id="upInputFile" file-model="Update.inputFile" aria-describedby="fileHelp"
+                                                      accept="image/*">
+                                                   <p ng-show="form.City.$invalid && !form.City.$pristine">Upload Image</p>
+                                                </div>
+                                             </div> -->
+                                             <button type="submit" class="btn btn-primary" ng-click="updateForm(item)" ng-disabled="submiteFourm.$invalid">Update</button>
+                                          </form>
+                                       </div>
+                                        <!--Second Form Ends Here-->
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
             <!-- modal ends -->
          </div>
       </div>

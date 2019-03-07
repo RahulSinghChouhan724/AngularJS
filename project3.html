@@ -13,30 +13,32 @@
          }
       </style>
    </head>
-   <body>
+   <body >
       <div class="container"ng-app="MyApp" ng-controller="MyCntrl" ng-init="displayName()">     
        <form >
          <div class="row">
             <div class="col-md-4">
-       				<div class="head1" ng-show="" ng-modal="Fist_div">
+       				<div class="head1" ng-show="Sec_div" ng-modal="Fist_div">
        					<label>First Name</label>
-       					<input type="text" class="I_name" id="F_name" ng-modal="F_name" ng-keypress="display($event)">
+       					<input type="text" class="I_name" id="name1" ng-modal="F_name" ng-keypress="display($event)">
        				</div>
-       				<div class="head" ng-hide="">
+       				<div class="head" ng-hide="First_div" ng-show="xcdz" ng-modal="Sec_div">
        					<span>Middle Name</span>
-       					<input type="text" class="I_name" id="M_name" ng-modal="M_name" ng-keypress="display($event)>
+       					<input type="text" class="I_name" id="name2" ng-modal="M_name" ng-keypress="display($event)>
        				</div>
-       				<div class="head">
+       				<div class="head" ng-modal="Third_div" ng-hide="">
        					<span>Last Name</span>
-       					<input type="text" class="I_name" id="L_name" ng-modal="L_name" ng-keypress="displayFullName($event)>
+       					<input type="text" class="I_name" id="name3" ng-modal="L_name" ng-keypress="displayFullName($event)>
        				</div>
-       			</div>	
-       				<div class="col-md-4">
-       					<label>Full Name</label>
-       		   			<input type="text" class="fname" id="F_name">	
-       				</div>
-       				
-       	</div>
+       			</div>		
+           	</div>
+       		<div class="row">
+				<div class="col-md-4">
+       				<label>Full Name</label>
+       	   			<input type="text" class=I_name" id="F_name">	
+       			</div>       		
+       		</div>
+       		
          </form>       
         
        </div>
@@ -44,12 +46,18 @@
          var Name = angular.module('MyApp',[]);
          Name.controller('MyCntrl',['$scope',
 			var Name_arr =[];
+         var divs = document.getElementByClassName("I_name").value
      		$scope.display = function(event){
-					if(event.keycode == 13){
-						for(var i=0;i<3;i++){
-								var name = document.getElementById("I_name").value				
+						for(var div=0;div>divs.lenght;div++){
+										divs[div].style.display = none;
+								if(event.keycode == 13){
+											var ele = document.getElementById("name"+i);
+											var n = document.getElementById("name"+i).value;
+											$scope.Name_arr.push(n);
+											ele.style.display= visible;
 									}		
-						}
+									}	
+						
        		}
              ]);
          

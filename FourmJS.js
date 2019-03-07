@@ -1,18 +1,18 @@
+var FourmApp = angular.module('MyApp', []);
 
 
-var FourmApp= angular.module('MyApp',[]);
- //Upload File Directive
- FourmApp.directive('fileRead', [ function() {
+		//Upload File Directive
+FourmApp.directive('fileRead', [function() {
     return {
-        restrict : 'A',
-        scope : {
-            fileModel : '='
+        restrict: 'A',
+        scope: {
+            fileModel: '='
         },
-        link : function(scope, elem, attr) {
+        link: function(scope, elem, attr) {
             elem.bind('change', function(changeEvent) {
                 var reader = new FileReader();
                 reader.onload = function(loadEvent) {
-                    scope.$apply(function() {       
+                    scope.$apply(function() {
                         scope.fileModel = loadEvent.target.result;
                     });
                 };
@@ -20,76 +20,98 @@ var FourmApp= angular.module('MyApp',[]);
             });
         }
     }
-} ])
+}])
 
-FourmApp.controller('FourmController',['$scope',
- function($scope,$user){
-            
-            $scope.City=[
-                {key:"",value:"select city"},
-                {key:"Bangalore",value:"Bangalore"},
-                {key:"Mumbai",value:"Mumbai"},
-                {key:"delhi",value:"delhi"}
-            ];
-            var num;
-            
-            $scope.roomData = [];
-            var item = {};
-            var itemObj ;
-            //feild Fetcher
-            $scope.submite= function(Room){
-                var num = (Math.ceil(Math.random() * 9));
-              
-                item.id= num;
-                item.name = $scope.Room.name;
-                item.cmnt =$scope.Room.Comment;
-                item.City =$scope.Room.City;
-                item.HT = $scope.Room.radio;
-                item.RI = $scope.Room.inputFile;
-               
-                 itemObj = angular.copy(item);
-                $scope.roomData.push(itemObj); 
-                
+
+FourmApp.controller('FourmController', ['$scope',
+    function($scope, $user) {
+        $scope.City = [{
+                key: "",
+                value: "select city"
+            },
+            {
+                key: "Bangalore",
+                value: "Bangalore"
+            },
+            {
+                key: "Mumbai",
+                value: "Mumbai"
+            },
+            {
+                key: "delhi",
+                value: "delhi"
             }
-            var id ;	
-            //$scope.Room.name="";
-            $scope.setFeild= function(index){
-                        	
-            	for(var i=0; i<$scope.roomData.length; i++){
-            		if(index == $scope.roomData[i]){
-            			item.id = index.id;
-            			item.name = index.name;
-            		}
-            			
-            
-            $scope.deleteRow = function(item){
-         
-                   for(var i=0;i<$scope.roomData.length;i++){
-            	if($scope.roomData[i].id == item.id){
-            		$scope.roomData.splice(i,1);
-            		/*$scope.$apply();*/
-            	}
+        ];
+        var num;
+        $scope.roomData = [];
+        var item = {};
+        var itemObj;
+        $scope.master = {};
+        var id;
+        var num;
+        var city;
+        //feild Fetcher
+        $scope.Retrn_id = function() {
+            num = (Math.ceil(Math.random() * 9));
+            return num;
+        }
+        $scope.submite = function(Room, form) {
+            $scope.Retrn_id();
+            item.id = num;
+            item.name = $scope.Room.name;
+            item.cmnt = $scope.Room.Comment;
+            item.City = $scope.Room.City;
+            item.HT = $scope.Room.radio;
+            item.RI = $scope.Room.inputFile;
+            itemObj = angular.copy(item);
+            $scope.roomData.push(itemObj);
+            $scope.clearFeilds(form);
+        }
+        
+        $scope.setFeild = function(item) {
+            for (var i = 0; i < $scope.roomData.length; i++) {
+                if ($scope.roomData[i].id == item.id) {
+                    document.getElementById("upRoomId").value = item.name;
+                    document.getElementById("upRoomComment").value = item.cmnt;
+                    var cty	=$scope.checked(item);
+                    document.getElementById("upCity").value = cty;
+                    document.getElementById("upBhk").checked.value = item.HT;
+                    
+                }
             }
-            	
+        }
+        
+        
+        $scope.checked = function(item) {
+            for (var i = 0; i < $scope.roomData.length; i++) {
+                if ($scope.roomData[i].id == item.id) {
+                    var cty = item.City;
+                    return cty;
+                }
             }
-            
-            $scope.updateForm = function(item) {
-             
-            	 for(var i=0;i<$scope.roomData.length;i++){
-            		if($scope.roomData[i].id == item.id){
-            			
-                        item.name = $scope.Room.name;
-                        item.cmnt =$scope.Room.Comment;
-                        item.City =$scope.Room.City;
-                        item.HT = $scope.Room.radio;
-                        item.RI = $scope.Room.inputFile;
-                     
-            		} 
-            		 
-            	 }
-            
-            };
-        }     
-            }	
+        }
+        
+        $scope.deleteRow = function(item) {
+            for (var i = 0; i < $scope.roomData.length; i++) {
+                if ($scope.roomData[i].id == item.id) {
+                    $scope.roomData.splice(i, 1);
+                    /*$scope.$apply();*/
+                }
             }
+        }
+        
+        $scope.updateForm = function(item) {
+            for (var i = 0; i < $scope.roomData.length; i++) {
+                if ($scope.roomData[i].id == item.id) {
+                		item.name = document.getElementById("upRoomId").value;
+                		item.cmnt =document.getElementById("upRoomComment").value;
+                		item.City =document.getElementById("upCity").value;
+                		item.HT =document.getElementById("upBhk").value;
+                }
+            }
+        }
+        
+        
+      
+    }
 ]);
