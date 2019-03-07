@@ -65,8 +65,9 @@ FourmApp.controller('FourmController', ['$scope',
             item.RI = $scope.Room.inputFile;
             itemObj = angular.copy(item);
             $scope.roomData.push(itemObj);
-            $scope.clearFeilds(form);
+          
         }
+        
         
         $scope.setFeild = function(item) {
             for (var i = 0; i < $scope.roomData.length; i++) {
@@ -99,14 +100,14 @@ FourmApp.controller('FourmController', ['$scope',
                 }
             }
         }
-        
+        	
         $scope.updateForm = function(item) {
             for (var i = 0; i < $scope.roomData.length; i++) {
                 if ($scope.roomData[i].id == item.id) {
-                		item.name = document.getElementById("upRoomId").value;
-                		item.cmnt =document.getElementById("upRoomComment").value;
-                		item.City =document.getElementById("upCity").value;
-                		item.HT =document.getElementById("upBhk").value;
+                	 item.name = $scope.Room.name;
+                     item.cmnt = $scope.Room.Comment;
+                     item.City = $scope.Room.City;
+                     item.HT = $scope.Room.radio;
                 }
             }
         }
